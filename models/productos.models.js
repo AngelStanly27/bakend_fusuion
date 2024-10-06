@@ -20,10 +20,8 @@ const obtenerTodos = async () => {
 const obtenerUnProducto = async (id) => {
 
     try {
-        // https://mongoosejs.com/docs/queries.html
-        //const producto = await ProductosModelo.find({ _id: id})
         const producto = await ProductosModelo.findById(id)
-        console.log(producto)
+        // console.log(producto)
         return producto
     } catch (error) {
         console.log('[obtenerUnProducto]', error)
@@ -34,19 +32,13 @@ const obtenerUnProducto = async (id) => {
 const crearProducto = async (producto) => {
 
     try {
-
-        // ? Primera forma
-        //const docMongooseProducto = new ProductosModelo(producto)
-        //const productoCreado = await docMongooseProducto.save() // Guardo en la DB
-        //console.log(productoCreado) // { _id, ...producto }
-        // ? Segunda forma
         const productoCreado = await ProductosModelo.create(producto)
         //console.log(productoCreado)
         return productoCreado       
         
     } catch (error) {
         //console.log('[crearProducto]', error)
-        throw error // Lanzo el error hacía la función que este utilizando esta función (crearProducto)
+        throw error 
     }
 
 
@@ -69,8 +61,6 @@ const updateProducto = async (id, productoPorEditado) => {
 const deleteProducto = async (id) => {
 
     try {
-
-        //const productoBorrado = await ProductosModelo.deleteOne({ _id: id })
         const productoBorrado = await ProductosModelo.findByIdAndDelete(id)
         //console.log(productoBorrado)
         return productoBorrado
